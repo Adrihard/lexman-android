@@ -11,6 +11,9 @@ import android.widget.ListView;
 public class MainActivity extends AppCompatActivity {
     ListView listView;
 
+    PersistanceLexiqueInterface lexiques = new PersistanceLexiqueStub   (this);
+    PersistanceTermeInterface   termes   = new PersistanceTermeStub     (this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
