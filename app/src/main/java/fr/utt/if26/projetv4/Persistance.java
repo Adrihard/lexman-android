@@ -57,6 +57,8 @@ public class Persistance extends SQLiteOpenHelper implements PersistanceLexiqueI
 
         = "DROP TABLE " + TER_TABLE;
 
+    private static final String[] TERMES_SELECTION = { TER_ID, TER_TITRE, TER_DESCRIPTIF, TER_LEXIQUE };
+
     private static String trimAndNullify(String str)
     {
         if (str != null)
@@ -77,6 +79,16 @@ public class Persistance extends SQLiteOpenHelper implements PersistanceLexiqueI
         String  descriptif  = c.getString(c.getColumnIndex(LEX_DESCRIPTIF));
 
         return (new Lexique(id, titre, descriptif));
+    }
+
+    private static Terme inflateTerme(Cursor c)
+    {
+        int     id          = c.getInt(c.getColumnIndex(TER_ID));
+        String  titre       = c.getString(c.getColumnIndex(TER_TITRE));
+        String  descriptif  = c.getString(c.getColumnIndex(TER_DESCRIPTIF));
+        int     id_lexique  = c.getInt(c.getColumnIndex(TER_LEXIQUE));
+
+        return (new Terme(id, titre, descriptif, id_lexique));
     }
 
     public Persistance(Context context) {
@@ -202,8 +214,35 @@ public class Persistance extends SQLiteOpenHelper implements PersistanceLexiqueI
     }
 
     @Override
-    public List<Terme> listerTermes(int id_lexique) {
-        return null;
+    public List<Terme> listerTermes(int id_lexique)
+    {
+        List<Terme> termes = new ArrayList();
+
+        try (SQLiteDatabase db = getReadableDatabase())
+        {
+            Cursor c = db.query
+            (
+                TER_TABLE,
+                TERMES_SELECTION,
+                TER_LEXIQUE + "=?",
+                new String[] { Integer.toString(id_lexique) },
+                null,
+                null,
+                null
+            );
+
+            if (c != null)
+            {
+                while (c.moveToNext())
+                    termes.add(inflateTerme(c));
+            }
+        }
+
+        catch (Exception e) {
+            return (new ArrayList());
+        }
+
+        return (termes);
     }
 
     @Override
