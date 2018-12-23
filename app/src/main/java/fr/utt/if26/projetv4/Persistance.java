@@ -2,9 +2,11 @@ package fr.utt.if26.projetv4;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Persistance extends SQLiteOpenHelper implements PersistanceLexiqueInterface, PersistanceTermeInterface
@@ -36,6 +38,8 @@ public class Persistance extends SQLiteOpenHelper implements PersistanceLexiqueI
 
         = "DROP TABLE " + LEX_TABLE;
 
+    private static final String[] LEXIQUES_SELECTION = { LEX_ID, LEX_TITRE, LEX_DESCRIPTIF };
+
     private static final String TERMES_CREATE
 
         = "CREATE TABLE " + TER_TABLE + "("
@@ -64,6 +68,15 @@ public class Persistance extends SQLiteOpenHelper implements PersistanceLexiqueI
         }
 
         return (null);
+    }
+
+    private static Lexique inflateLexique(Cursor c)
+    {
+        int     id          = c.getInt(c.getColumnIndex(LEX_ID));
+        String  titre       = c.getString(c.getColumnIndex(LEX_TITRE));
+        String  descriptif  = c.getString(c.getColumnIndex(LEX_DESCRIPTIF));
+
+        return (new Lexique(id, titre, descriptif));
     }
 
     public Persistance(Context context) {
@@ -157,8 +170,35 @@ public class Persistance extends SQLiteOpenHelper implements PersistanceLexiqueI
     }
 
     @Override
-    public List<Lexique> listerLexiques() {
-        return null;
+    public List<Lexique> listerLexiques()
+    {
+        List<Lexique> lexiques = new ArrayList();
+
+        try (SQLiteDatabase db = getReadableDatabase())
+        {
+            Cursor c = db.query
+            (
+                LEX_TABLE,
+                LEXIQUES_SELECTION,
+                null,
+                null,
+                null,
+                null,
+                null
+            );
+
+            if (c != null)
+            {
+                while (c.moveToNext())
+                    lexiques.add(inflateLexique(c));
+            }
+        }
+
+        catch (Exception e) {
+            return (new ArrayList());
+        }
+
+        return (lexiques);
     }
 
     @Override
