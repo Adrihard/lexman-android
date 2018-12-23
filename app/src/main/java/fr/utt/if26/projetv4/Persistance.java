@@ -299,7 +299,19 @@ public class Persistance extends SQLiteOpenHelper implements PersistanceLexiqueI
     }
 
     @Override
-    public boolean supprimerTerme(int id) {
-        return false;
+    public boolean supprimerTerme(int id)
+    {
+        try (SQLiteDatabase db = getWritableDatabase())
+        {
+            return (
+                db.delete
+                (
+                    TER_TABLE,
+                    TER_ID + "=?",
+                    new String[] { Integer.toString(id) }
+                )
+                != 0
+            );
+        }
     }
 }
