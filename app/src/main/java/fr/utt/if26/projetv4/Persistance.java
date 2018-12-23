@@ -246,8 +246,25 @@ public class Persistance extends SQLiteOpenHelper implements PersistanceLexiqueI
     }
 
     @Override
-    public boolean creerTerme(String titre, String descriptif, int id_lexique) {
-        return false;
+    public boolean creerTerme(String titre, String descriptif, int id_lexique)
+    {
+        String _titre       = trimAndNullify(titre);
+        String _descriptif  = trimAndNullify(descriptif);
+
+        ContentValues values = new ContentValues();
+
+        if (_titre != null && _descriptif != null)
+        {
+            values.put(TER_TITRE,       _titre);
+            values.put(TER_DESCRIPTIF,  _descriptif);
+            values.put(TER_LEXIQUE,     id_lexique);
+
+            try (SQLiteDatabase db = getWritableDatabase()) {
+                return (db.insert(TER_TABLE, null, values) != -1);
+            }
+        }
+
+        return (false);
     }
 
     @Override
