@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //bdd.creerTerme("titre2","desc1",0);
-        bdd.creerLexique("lex1","desc");
 
 
        // List<Lexique> mesLexiques = Lexique.listerLexiques();
@@ -37,16 +36,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if(position==0){
+
                     Intent myintent= new Intent (view.getContext(),Dico.class);
                     myintent.putExtra("ID",position);
-                    startActivityForResult(myintent,0);
-                }
-                if(position==1){
-                    Intent myintent= new Intent (view.getContext(),Dico.class);
-                    myintent.putExtra("ID",position);
-                    startActivityForResult(myintent,1);
-                }
+                    startActivityForResult(myintent,position);
+
             }
 
         });

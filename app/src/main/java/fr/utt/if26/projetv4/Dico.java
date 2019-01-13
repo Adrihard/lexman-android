@@ -38,10 +38,11 @@ public class Dico extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position==0){
+
                     Intent myintent= new Intent (view.getContext(),Def.class);
-                    startActivityForResult(myintent,0);
-                }
+                    myintent.putExtra("ID",position);
+                    startActivityForResult(myintent,position);
+
             }
         });
     }
