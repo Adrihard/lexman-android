@@ -7,6 +7,6 @@ public interface PersistanceLexiqueInterface
     public boolean          creerLexique    (String titre, String descriptif);
     public boolean          modifierLexique (int id, String titre, String descriptif);
     public boolean          supprimerLexique(int id);
-    public List<Lexique>    listerLexiques  ();
+    public List<Lexique> listerLexiques  ();
     public List<Terme>      listerTermes    (int id_lexique);
 }

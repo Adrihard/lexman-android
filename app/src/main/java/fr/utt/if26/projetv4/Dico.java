@@ -14,6 +14,8 @@ import java.util.List;
 
 public class Dico extends AppCompatActivity {
     ListView listView;
+    int ID;
+
     Persistance bdd = new Persistance(this);
     //Terme T = new Terme(0,"i","t",1);
 
@@ -21,8 +23,13 @@ public class Dico extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dico);
+
+        Intent myintent = getIntent();
+
+        ID=myintent.getIntExtra("ID",0);
+
         listView = (ListView)findViewById(R.id.ListViewDico);
-        List<Terme> listDico = bdd.listerTermes(0);
+        List<Terme> listDico = bdd.listerTermes(ID);
         List<String> values = ListeTitre(listDico) ;
 
         ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,
@@ -48,5 +55,13 @@ public class Dico extends AppCompatActivity {
             lTitre.add(lTerme.get(i).getTitre());
         }
         return lTitre;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }

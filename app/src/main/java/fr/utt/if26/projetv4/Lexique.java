@@ -3,12 +3,12 @@ package fr.utt.if26.projetv4;
 public class Lexique {
 
     private int Id;
-    private String Tritre;
+    private String Titre;
     private String Descriptif;
 
-    public Lexique(int id, String tritre, String descriptif) {
+    public Lexique(int id, String titre, String descriptif) {
         Id = id;
-        Tritre = tritre;
+        Titre = titre;
         Descriptif = descriptif;
     }
 
@@ -20,12 +20,12 @@ public class Lexique {
         Id = id;
     }
 
-    public String getTritre() {
-        return Tritre;
+    public String getTitre() {
+        return Titre;
     }
 
-    public void setTritre(String tritre) {
-        Tritre = tritre;
+    public void setTitre(String titre) {
+        Titre = titre;
     }
 
     public String getDescriptif() {
