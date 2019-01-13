@@ -210,7 +210,7 @@ public class Persistance extends SQLiteOpenHelper implements PersistanceLexiqueI
             return (new ArrayList());
         }
 
-        return (lexiques);
+       return (lexiques);
     }
 
     @Override

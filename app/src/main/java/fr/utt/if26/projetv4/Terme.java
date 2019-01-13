@@ -14,6 +14,9 @@ public class Terme {
         IdLexique = idLexique;
     }
 
+    public void init(){
+
+    }
     public int getId() {
         return Id;
     }
@@ -44,5 +47,17 @@ public class Terme {
 
     public void setIdLexique(int idLexique) {
         IdLexique = idLexique;
+    }
+
+    public void affiche() {
+        System.out.println(toString());
+    }
+
+    @Override
+    public String toString() {
+        return "Module{" +
+                "Titre='" + Titre + '\'' +
+                ", Descriptif='" + Descriptif + '\'' +
+                '}';
     }
 }
