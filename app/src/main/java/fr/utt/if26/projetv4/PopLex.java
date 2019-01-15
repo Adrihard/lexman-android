@@ -42,9 +42,9 @@ public class PopLex extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent intent= new Intent (v.getContext(),ModifLex.class);
-                intent.putExtra("ID",ID);
-                startActivityForResult(intent,ID);
+                Intent intentMod= new Intent (v.getContext(),ModifLex.class);
+                intentMod.putExtra("IDMod",ID);
+                startActivityForResult(intentMod,ID);
 
             }
         });

@@ -33,6 +33,7 @@
         <activity android:name="ModifDef"></activity>
         <activity android:name="AjoutDef"></activity>
         <activity android:name="AjoutLexique"></activity>
+        <activity android:name=".ModifLex"></activity>
     </application>
 
 </manifest>
