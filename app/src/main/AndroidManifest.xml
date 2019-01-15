@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".MainActivity">
+            android:label="ProjetV4" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,8 +29,10 @@
         <activity android:name=".Def"></activity>
         <activity android:name=".Def2"></activity>
         <activity android:name="PopDef"></activity>
+        <activity android:name="PopLex"></activity>
         <activity android:name="ModifDef"></activity>
         <activity android:name="AjoutDef"></activity>
+        <activity android:name="AjoutLexique"></activity>
     </application>
 
 </manifest>
