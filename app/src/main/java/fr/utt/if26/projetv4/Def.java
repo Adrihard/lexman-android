@@ -15,7 +15,9 @@ import java.util.List;
 public class Def extends AppCompatActivity {
     TextView tTitre;
     TextView tDescription;
+    ListView listView;
     int ID;
+
     Persistance bdd = new Persistance(this);
 
     @Override
@@ -23,9 +25,10 @@ public class Def extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_def);
 
-        Intent myintent = getIntent();
+        Intent intent = getIntent();
 
-        ID=myintent.getIntExtra("ID",0);
+        ID=intent.getIntExtra("IDL2",0);
+       // listView = (ListView)findViewById(R.id.ListViewDico;
 
         List<Terme> listTerme = bdd.listerTermes(ID);
         String Titre =(listTerme.get(ID).getTitre());

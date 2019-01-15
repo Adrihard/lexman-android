@@ -25,7 +25,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Def"></activity>
-
+        <activity android:name=".Def2"></activity>
+        <activity android:name="PopDef"></activity>
+        <activity android:name="ModifDef"></activity>
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -270,6 +271,7 @@ public class Persistance extends SQLiteOpenHelper implements PersistanceLexiqueI
     @Override
     public boolean modifierTerme(int id, String titre, String descriptif)
     {
+        Log.e("DATABASE","je fais modifierTerme");
         String _titre       = trimAndNullify(titre);
         String _descriptif  = trimAndNullify(descriptif);
 

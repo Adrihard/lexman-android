@@ -14,7 +14,10 @@ import java.util.List;
 
 public class Dico extends AppCompatActivity {
     ListView listView;
-    int ID;
+    int IDL;
+    int IDT;
+    String titre="2";
+    String desc="1";
 
     Persistance bdd = new Persistance(this);
     //Terme T = new Terme(0,"i","t",1);
@@ -25,12 +28,13 @@ public class Dico extends AppCompatActivity {
         setContentView(R.layout.activity_dico);
 
         Intent myintent = getIntent();
-
-        ID=myintent.getIntExtra("ID",0);
+        IDL=myintent.getIntExtra("IDL",0);
 
         listView = (ListView)findViewById(R.id.ListViewDico);
-        List<Terme> listDico = bdd.listerTermes(ID);
+
+        final List<Terme> listDico = bdd.listerTermes(IDL);
         List<String> values = ListeTitre(listDico) ;
+       // View v =new View();
 
         ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,
                 android.R.layout.activity_list_item,android.R.id.text1,values);
@@ -39,12 +43,35 @@ public class Dico extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                    Intent myintent= new Intent (view.getContext(),Def.class);
-                    myintent.putExtra("ID",position);
-                    startActivityForResult(myintent,position);
+
+                  //  Intent intent= new Intent (view.getContext(),Def.class);
+                 //   intent.putExtra("IDL2",IDL);
+                 //   startActivityForResult(intent,IDL);
+                titre=listDico.get(position).getTitre();
+                desc=listDico.get(position).getDescriptif();
+
+                Intent intent2= new Intent (view.getContext(),Def2.class);
+                intent2.putExtra("titre",titre);
+                intent2.putExtra("desc",desc);
+                startActivityForResult(intent2,1);
+
+
 
             }
         });
+        //listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+        listView.setLongClickable(true);
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                IDT=listDico.get(position).getId();
+                Intent my_intent = new Intent(view.getContext(), PopDef.class);
+                my_intent.putExtra("IDT", IDT);
+                startActivityForResult(my_intent, IDT);
+                return true;
+            }
+            });
     }
 
     private List<String> ListeTitre(List<Terme> lTerme)
@@ -58,11 +85,5 @@ public class Dico extends AppCompatActivity {
         return lTitre;
     }
 
-    public int getID() {
-        return ID;
-    }
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
 }
