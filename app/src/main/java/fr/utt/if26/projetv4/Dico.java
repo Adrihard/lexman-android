@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class Dico extends AppCompatActivity {
     int IDT;
     String titre="2";
     String desc="1";
+    Button Add;
 
     Persistance bdd = new Persistance(this);
     //Terme T = new Terme(0,"i","t",1);
@@ -33,7 +35,7 @@ public class Dico extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.ListViewDico);
 
         final List<Terme> listDico = bdd.listerTermes(IDL);
-        List<String> values = ListeTitre(listDico) ;
+        List<String> values = ListeTitre(listDico);
        // View v =new View();
 
         ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,
@@ -72,7 +74,19 @@ public class Dico extends AppCompatActivity {
                 return true;
             }
             });
+
+        Add = (Button) findViewById(R.id.bAjoute);
+        Add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent0 = new Intent(v.getContext(), AjoutDef.class);
+                intent0.putExtra("IDl", IDL);
+                startActivityForResult(intent0, 1);
+            }
+        });
     }
+
 
     private List<String> ListeTitre(List<Terme> lTerme)
     {
@@ -84,6 +98,8 @@ public class Dico extends AppCompatActivity {
         }
         return lTitre;
     }
-
-
 }
+
+
+
+
